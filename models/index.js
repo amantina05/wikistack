@@ -31,11 +31,14 @@ const Page = db.define('page', {
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    is: ["^[a-z]+$",'i']
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEMail: true
   }
 });
 
