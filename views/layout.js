@@ -28,6 +28,8 @@ module.exports = (content) => html`<!DOCTYPE html>
           </div>
         </div>
       </div>
+      <br>
+      <br>
       <div class="container content">
         $${content}
       </div>

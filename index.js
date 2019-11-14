@@ -5,29 +5,34 @@ const bodyParser = require('body-parser')
 const layout = require("./views/layout");
 const { db } = require('./models');
 const wikiRouter = require('./routes/wiki');
-// const userRouter = require('./routes/user');
+const userRouter = require('./routes/user');
 
 
 const app = express()
 
 const port = 3000
-
+app.use(express.urlencoded ({extended: false}))
 app.use(express.static(__dirname + 'public'))
 app.use('/wiki', wikiRouter);
-// app.use('/user', userRouter);
+app.use('/users', userRouter);
+
+
+// app.get('/', (req, res, next) => {
+//   res.redirect('/wiki')
+// })
 
 app.get('/', function (req, res) {
-  res.send(layout(' '))
+  res.send(layout(' <h1>tina</h1> '))
 })
 
 const init = async () => {
   await db.sync()
-  server.listen(port, () => {
+  app.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
   })
 }
 init()
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Listening on port ${port}`)
+// })
